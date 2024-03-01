@@ -95,3 +95,27 @@
 | 0001    | LOAD_B_A                             | 0x001A 0000               |
 | 0002    | DEC_B                                | 0x0042 0000               |
 
+
+# 3. Microprocesseur à 3 registres
+
+## Caractéristiques du microprocesseur
+
+- **Nombre de bits par instruction:** 32 bits
+- **Nombre de bits pour le code opératoire:** 16 bits
+- **Registre C (bit 13 du code opératoire):** Permet d’activer l’écriture du résultat dans le registre C
+- **MUX1 (bit 12 du code opératoire):** Permet de choisir quoi envoyer à l’entrée I1 de l’UAL
+
+## Codes binaires et hexa des instructions
+
+| Instruction   | Code Binaire                  | Code Héxa       |
+|---------------|-------------------------------|-----------------|
+| LOAD_A #valeur | XX0X 0000 0001 0100 0xVVVV   | 0x0014 VVVV     |
+| LOAD_B #valeur | XX0X 0000 0001 0010 0xVVVV   | 0x0012 VVVV     |
+| LOAD_A_B       | XX00 0000 0010 X100 0xXXXX   | 0x0024 0000     |
+| LOAD_B_C       | XX01 0000 0010 X010 0xXXXX   | 0x1022 0000     |
+| LOAD_C_A       | XX01 0000 0010 X010 0xXXXX   | 0x2018 0000     |
+| ADD_C_AB       | XX10 0000 0101 1000 0xXXXX   | 0x2058 0000     |
+| JMP <label>    | XX0X 0000 0000 0001 0xAAAA   | 0x0001 AAAA     |
+
+## Programme pour permuter les contenus des registres A et B
+
