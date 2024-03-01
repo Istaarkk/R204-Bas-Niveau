@@ -57,3 +57,36 @@
 | 0001    | 1a0000                      | 0001 1010 0000 0000 0000 0000         | LOAD_B_A             |
 | 0002    | c20000                      | 1100 0010 0000 0000 0000 0000         | NOT_B                |
 | 0003    | 320000                      | 0011 0010 0000 0000 0000 0000         | INC_B                |
+
+
+# 2. Microprocesseur avec sauts conditionnels
+
+## Caractéristiques du microprocesseur
+
+- **Nombre de bits par instruction:** 32 bits
+- **Nombre de bits pour le code opératoire:** 16 bits
+- **Nombre de bits pour le champ DATA ou adresse:** 16 bits
+
+## Rôles des bits supplémentaires
+
+- **JMPZ:** Jump If = 0
+- **JMPNZ:** Jump If not 0
+- **JMPN:** Jump if négatif
+- **JMPPZ:** Jump if positif or NULL
+
+## Codes binaires et hexa des instructions
+
+| Instruction | Code Binaire             | Code Héxa       |
+|-------------|--------------------------|-----------------|
+| NOP         | 0000 0000 X000 XXXX      | 0x0000 0000     |
+| LOAD_A #valeur | 0000 0001 0100 VVVV   | 0x0014 VVVV     |
+| LOAD_B_A    | 0000 0001 1010 XXXX      | 0x001A 0000     |
+| MUL_A_B     | 0000 1000 1100 XXXX      | 0x008C 0000     |
+| DEC_B       | 0000 1000 1100 XXXX      | 0x0042 0000     |
+| JMP <label> | 0000 0000 0001 AAAA      | 0x0001 AAAA     |
+| JMPZ <label>| 1000 0000 0000 AAAA      | 0x0800 AAAA     |
+| JMPNZ <label>| 0100 0000 0000 AAAA     | 0x0400 AAAA     |
+
+## Programme pour calculer la factorielle de 5 avec JMPNZ
+
+
