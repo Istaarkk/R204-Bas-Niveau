@@ -89,4 +89,9 @@
 
 ## Programme pour calculer la factorielle de 5 avec JMPNZ
 
+| Adresse | Instruction (mnémonique assembleur) | Contenu mémoire (en hexa) |
+|---------|--------------------------------------|---------------------------|
+| 0000    | LOAD_A #5                            | 0x0014 0005               |
+| 0001    | LOAD_B_A                             | 0x001A 0000               |
+| 0002    | DEC_B                                | 0x0042 0000               |
 
