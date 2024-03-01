@@ -130,3 +130,11 @@
 
 ## Programme pour calculer la suite de Fibonacci
 
+| Adresse | Instruction assembleur | Code Hexa       |
+|---------|------------------------|-----------------|
+| 0000    | LOAD_A #0              | 0x0014 0000     |
+| 0001    | LOAD_B #1              | 0x0012 0001     |
+| 0002    | ADD_C AB               | 0x2058 0000     |
+| 0003    | LOAD_A_B               | 0x0024 0000     |
+| 0004    | LOAD_B_C               | 0x1022 0000     |
+| 0005    | JMP 002                | 0x0001 0002     |
