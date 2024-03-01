@@ -119,3 +119,10 @@
 
 ## Programme pour permuter les contenus des registres A et B
 
+| Adresse | Instruction assembleur | Code Hexa       |
+|---------|------------------------|-----------------|
+| 0000    | LOAD_A #3              | 0x0014 0003     |
+| 0001    | LOAD_B #5              | 0x0012 0005     |
+| 0002    | LOAD_C _A              | 0x2018 0000     |
+| 0003    | LOAD_A_B               | 0x0024 0000     |
+| 0004    | LOAD_B_C               | 0x1022 0000     |
