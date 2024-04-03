@@ -1,0 +1,6 @@
+*.exe
+*.pdb
+*.sln
+**/x64
+**/.vs
+**/*.vcxproj*
