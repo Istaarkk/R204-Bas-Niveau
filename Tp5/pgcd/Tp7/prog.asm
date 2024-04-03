@@ -1,0 +1,18 @@
+.CODE
+	pgcd PROC
+
+BOUCLE:			MOV EAX,ECX
+			MOV ECX,EDX
+			
+			MOV EDX,0
+			DIV ECX
+			
+			CMP EDX,0
+			JNE BOUCLE
+			MOV EAX,ECX
+
+			RET
+
+	pgcd ENDP
+
+END 
