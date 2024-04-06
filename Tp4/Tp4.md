@@ -56,3 +56,127 @@ Le tableau ci-dessus indique les différents registres des processeurs x64. Dans
 - **Que contient le registre des indicateurs EFL ? Quand est-il modifié ?**
   - *Rep :* Le registre EFL contient des informations sur certaines propriétés du dernier résultat de l'UAL (Unité Arithmétique et Logique). Il est modifié en fonction du résultat obtenu (ex : résultat nul, présence de retenue, contrôle de parité, etc.)
   - *•	Le registre des indicateurs est mis à jour après chaque instruction logique ou cmp 
+
+#2
+```cpp
+// main.cpp
+#include <iostream>
+using namespace std;
+
+extern "C" int somme(int a, int b);
+
+int main()
+{
+    int a, b;
+    cout << "Entrez un premier entier : ";
+    cin >> a;
+    cout << "Entrez un deuxieme entier : ";
+    cin >> b;
+    cout << a << " + " << b << " = " << somme(a, b) << endl;
+    return 0;
+}
+
+; prog.asm
+.CODE
+    somme PROC
+        MOV EAX, ECX
+        ADD EAX, EDX
+        RET
+    somme ENDP
+END
+
+
+### Expliquer le rôle de la ligne `extern "C" int somme(int a, int b);`
+
+La ligne `extern "C" int somme(int a, int b);` indique au compilateur C++ que cette fonction doit être traitée avec le protocole d'appel C et ne doit pas être compilée par le compilateur C++. Cela garantit que le compilateur utilise les conventions de nommage et d'appel compatibles avec le langage C.
+
+### Définition des lignes `.CODE` et `END`
+
+- La directive `.CODE` informe le compilateur qu'il entre dans une section de code où se trouvent les instructions du programme.
+- `END` marque la fin du programme.
+
+### Définition des lignes `somme PROC` et `somme ENDP`
+
+- `somme PROC` indique le début de la définition de la procédure `somme`.
+- `somme ENDP` marque la fin de la procédure `somme`.
+
+### Taille en bits des paramètres a et b et registres utilisés pour transmettre leurs valeurs
+
+Les paramètres a et b sont de taille 32 bits (int). Les valeurs des paramètres sont transmises via les registres ECX (pour a) et EDX (pour b) conformément à la convention FastCall.
+
+### Taille en bits de la valeur retournée par la fonction somme et registre utilisé
+
+La valeur retournée par la fonction somme est de 32 bits, car elle retourne un int. Cette valeur est stockée dans le registre EAX, conformément à la convention FastCall.
+
+### Fonction des instructions `MOV EAX,ECX` et `ADD EAX,EDX`
+
+- `MOV EAX, ECX` copie la valeur du registre ECX (contenant la valeur de a) dans le registre EAX.
+- `ADD EAX, EDX` ajoute la valeur du registre EDX (contenant la valeur de b) à la valeur précédemment stockée dans le registre EAX.
+
+3. Programme avec section de données
+
+```assembly
+.DATA
+    var1    BYTE    5
+    var2    WORD    8
+    var3    DWORD   7
+    var4    QWORD   9
+    var5    TBYTE   3
+    var6    REAL4   6.25
+    var7    REAL8   2.5
+    var8    DB      2
+    var9    DB      '2'
+    var10   DB      -2, 128, -128, 12
+    var11   DB      'abc',0
+    var12   DB      ?
+.CODE
+    fct PROC
+        MOV AL, var1
+        MOV BL, var8
+        ADD AL, BL
+        MOV var12, AL
+        RET
+    fct ENDP
+END
+
+##Si ... alors ... sinon
+.CODE
+    majorite PROC
+        si_supegal18 : CMP ECX,18
+        JAE alors_majeur
+        sinon_mineur : MOV AL,0
+        JMP fin_si
+        alors_majeur : MOV AL,1
+
+        fin_si : RET
+    majorite ENDP
+END
+
+##Boucle et Tableau
+.DATA AA
+    tab_src DWORD 15 , 80 , 99 , 45 , 8 , 51 , 3 , 19 , 75 , 10
+    tab_dest DWORD 10 DUP (?)
+.CODE
+    multiple3 PROC
+        MOV RSI,0
+        MOV RDI,0
+        MOV EBX,3
+        boucle :
+            MOV EDX,0
+            MOV EAX,tab_src[RSI*4]
+            DIV EBX
+            CMP EDX,0
+            JNE suivant
+        multiple :
+            MOV ECX,tab_src[RSI*4]
+            MOV tab_dest[RDI*4],ECX
+            INC RDI
+        suivant :
+            INC RSI
+            CMP RSI,9
+            JBE boucle
+        RET
+    multiple3 ENDP
+END
+
+##A vous de jouer  
